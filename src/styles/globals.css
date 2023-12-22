@@ -18,10 +18,27 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+}
+
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+   position: absolute;
+   left: 0px;
+  font-size: 25px;
+  top: 16px;
+  z-index: 999;
+  opacity: 0;
+}
+
+.mainlogo{
+  margin: 0 auto;
+}
+table tr th {
+  padding: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+table tr td {
+  padding: 16px;
 }
