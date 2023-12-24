@@ -1,4 +1,4 @@
-const DashboardSvgIcon = (props) => {
+const DashboardSvgIcon = (props:any) => {
   return (
     <>
       <div>

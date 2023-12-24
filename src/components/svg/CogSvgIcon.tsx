@@ -1,4 +1,4 @@
-const CogSvgIcon = (props) => {
+const CogSvgIcon = (props:any) => {
   return (
     <>
       <div>

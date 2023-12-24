@@ -1,4 +1,4 @@
-const ClipboardSvgIcon = (props) => {
+const ClipboardSvgIcon = (props:any) => {
   return (
     <>
       <div>

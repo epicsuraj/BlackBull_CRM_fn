@@ -1,4 +1,4 @@
-const BookingSvgIcon = (props) => {
+const BookingSvgIcon = (props:any) => {
   return (
     <>
       <div>

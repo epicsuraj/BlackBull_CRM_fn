@@ -1,4 +1,4 @@
-const RecieptSvgIcon = (props) => {
+const RecieptSvgIcon = (props:any) => {
   return (
     <>
       <div>

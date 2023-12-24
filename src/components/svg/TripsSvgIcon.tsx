@@ -1,4 +1,4 @@
-const TripsSvgIcon = (props) => {
+const TripsSvgIcon = (props:any) => {
   return (
     <>
       <div>

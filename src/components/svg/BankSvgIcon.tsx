@@ -1,4 +1,4 @@
-const BankSvgIcon = (props) => {
+const BankSvgIcon = (props:any) => {
   return (
     <>
       <div>
