@@ -1,97 +1,115 @@
-import React from 'react'
-import Checkbox from '@/components/Checkbox';
-import {useLogin} from '../../network-request/mutation';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-import InputField from '@/components/InputField';
-
+import React from "react";
+import Checkbox from "@/components/Checkbox";
+// import {useLogin} from '../../network-request/mutation';
+// import { toast } from 'react-toastify';
+// import "react-toastify/dist/ReactToastify.css";
+import InputField from "@/components/InputField";
+import Image from "next/image";
+import Button from "@/components/Button";
 
 const Login = () => {
-  const {mutate}=useLogin();
+  // const {mutate}=useLogin();
   const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const handleLogin =(e:any)=>{
-      e.preventDefault();
-      console.log("e",{e});
-      mutate(
-        {email,password},
-         {
-          onSuccess: (data:any) => {
-             if (data.success) {
-              toast.success("Login Successfully");
-              console.log("data",{data});
-              setTimeout(() => {
-                window.location.href = "/dashboard";
-              }, 2000);
-          } else {
-         
-            toast.error(data.message || "Login Failed");
-          }
-           
-          },
-          onError: (data:any) => {
-            toast.error(data?.response?.data?.message || "Something Went Wrong");
-          },
-        });
-  }
+  const [password, setPassword] = React.useState("");
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    console.log("e", { e });
+    // mutate(
+    //   {email,password},
+    //    {
+    //     onSuccess: (data:any) => {
+    //        if (data.success) {
+    //         toast.success("Login Successfully");
+    //         console.log("data",{data});
+    //         setTimeout(() => {
+    //           window.location.href = "/dashboard";
+    //         }, 2000);
+    //     } else {
+
+    //       toast.error(data.message || "Login Failed");
+    //     }
+
+    //     },
+    //     onError: (data:any) => {
+    //       toast.error(data?.response?.data?.message || "Something Went Wrong");
+    //     },
+    //   });
+  };
+
   return (
     <>
-      <div className="p-[55px]">
-        <div className="grid grid-cols-2">
-          <form onSubmit={handleLogin} method="POST">
-          <div className="max-w-[440px] ml-auto mr-auto text-center pt-10">
-          <div className="flex justify-center pb-12">
-          <img src="/logo.png" alt="logo" />
+      <div>
+        <div className=" pt-4 pl-6 absolute">
+          <Image src="/logo.png" alt="logo" width={150} height={150} />
         </div>
-            <h1 className="font-semibold text-2xl tracking-wide">
-              Join Black Bull
-            </h1>
-            <p className="mt-2">
-              Take the first step towards seamless logistics solutions.
-            </p>
-            <div className="flex flex-col mt-11">
-              <InputField type="text" placeholder="Email address" className="bg-[#F7F8F9]"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)} name={''} id={''}/>
+        <div className="grid grid-cols-2 items-center">
+          <form onSubmit={handleLogin} method="POST">
+            <div className="max-w-[440px] ml-auto mr-auto text-center pt-10">
+              <h1 className="font-bold text-3xl tracking-wide">
+                New User Login
+              </h1>
+              <p className="mt-2">
+                Sign in using your email and temporary password to set up your
+                account.
+              </p>
+              <div className="flex flex-col mt-11">
+                <InputField
+                  type="text"
+                  placeholder="Email address"
+                  className="bg-cool-gray"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  name={""}
+                  id={""}
+                  src="/mail.svg"
+                  alt="mail"
+                  svgWidth={16}
+                  svgHeight={16}
+                />
 
-              <InputField type="text" placeholder="Password" className="bg-[#F7F8F9] " value={password}
-                onChange={(e) => setPassword(e.target.value)} name={''} id={''}/>
-            </div>
-            <div>
-              <Checkbox
-              />
-            </div>
-            
-              <div className="mt-8 mb-4">
-                <button type='submit' className="font-semibold "/>
+                <InputField
+                  type="password"
+                  placeholder="password"
+                  className="bg-cool-gray"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  name={""}
+                  id={""}
+                  src="/lock.svg"
+                  alt="lock"
+                  svgWidth={16}
+                  svgHeight={16}
+                />
+                <p className="text-right text-[#0F172A] font-semibold text-sm ">
+                  <span className="cursor-pointer">Forgot Password?</span>
+                </p>
               </div>
               <div>
-                <span className="text-[#737373] text-sm mt-10 font-medium">Already joined? <b className="text-black font-medium">Login now</b></span>
+                <Checkbox content="Remember Me" />
               </div>
-           
-          </div>
+
+              <div className="mt-8 mb-4">
+                <Button
+                  text="Proceed to Change Password"
+                  className="rounded-[30px]"
+                />
+              </div>
+              {/* <div>
+                <span className="text-[#737373] text-sm mt-10 font-medium">
+                  Already joined?{" "}
+                  <b className="text-black font-medium">Login now</b>
+                </span>
+              </div> */}
+            </div>
           </form>
           <div className="flex justify-center">
-            {/* <h2 className="text-3xl font-semibold">
-              Unlock Your Logistics Success with BlackBull: Join Today and Soar
-              Higher!
-            </h2>
-            <div className="my-8">
-              <img src="/cutter.png" alt="lines" />
-            </div>
-            <div>
-              {Qualities.map((value, index) => {
-                return (
-                  <div className="flex gap-2 my-4 text-[18px]">
-                    <img src="/check.svg" alt="check" width={22} height={22} />
-                    <div>
-                      <b>{value.heading}</b> <span>{value.content}</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div> */}
-            <img src="/1.png" alt="" style={{width:"60%"}}/>
+            <Image
+              src="/Background.png"
+              alt="logo"
+              width={700}
+              height={700}
+              className="w-full h-screen"
+            />
           </div>
         </div>
       </div>
@@ -117,4 +135,3 @@ const Qualities = [
       "Seamlessly connect to a world of logistics possibilities while experiencing personalized, local support.",
   },
 ];
-

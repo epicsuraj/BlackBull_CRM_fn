@@ -20,18 +20,17 @@ body {
   color: rgb(var(--foreground-rgb));
 }
 
-
 input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
-   position: absolute;
-   left: 0px;
+  position: absolute;
+  left: 0px;
   font-size: 25px;
   top: 16px;
   z-index: 999;
   opacity: 0;
 }
 
-.mainlogo{
+.mainlogo {
   margin: 0 auto;
 }
 table tr th {
@@ -41,4 +40,7 @@ table tr th {
 }
 table tr td {
   padding: 16px;
+}
+.bg-cool-gray {
+  background-color: #f1f5f9;
 }
