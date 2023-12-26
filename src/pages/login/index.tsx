@@ -1,11 +1,11 @@
 import React from "react";
-import Checkbox from "@/components/Checkbox";
+import Checkbox from "../../../components/Checkbox";
 // import {useLogin} from '../../network-request/mutation';
 // import { toast } from 'react-toastify';
 // import "react-toastify/dist/ReactToastify.css";
-import InputField from "@/components/InputField";
+import InputField from "../../../components/InputField";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "../../../components/Button";
 
 const Login = () => {
   // const {mutate}=useLogin();
@@ -52,7 +52,7 @@ const Login = () => {
                 Sign in using your email and temporary password to set up your
                 account.
               </p>
-              <div className="flex flex-col mt-11">
+              <div className="flex gap-4 flex-col mt-11">
                 <InputField
                   type="text"
                   placeholder="Email address"
@@ -91,7 +91,7 @@ const Login = () => {
               <div className="mt-8 mb-4">
                 <Button
                   text="Proceed to Change Password"
-                  className="rounded-[30px]"
+                  className="!rounded-[30px]  justify-center"
                 />
               </div>
               {/* <div>

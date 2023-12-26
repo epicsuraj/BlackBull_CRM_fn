@@ -44,3 +44,10 @@ table tr td {
 .bg-cool-gray {
   background-color: #f1f5f9;
 }
+.text-primary {
+  color: #032272;
+}
+input:focus-visible {
+  border: 0;
+  outline: 0;
+}
