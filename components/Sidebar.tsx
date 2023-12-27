@@ -17,7 +17,13 @@ const Sidebar = () => {
     <>
       <div className="text-black  flex  relative top-0 h-screen">
         <nav className="fixed top-0 text-black bg-white p-4 w-[300px] h-screen">
-          <Image src="/logo.png" alt="logo" width={200} height={100} />
+          <Image
+            src="/logo.svg"
+            alt="logo"
+            width={200}
+            height={100}
+            className="m-auto"
+          />
           <ul className="list-none p-6 mb-4 mt-8">
             {sidebarCollection.map((value, index) => {
               return (
