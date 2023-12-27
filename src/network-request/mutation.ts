@@ -1,9 +1,10 @@
-// import { useMutation } from "react-query";
-// import { loginUser, userSignup } from "./api";
+import { useMutation } from "react-query";
+import { loginUser, register } from "./api";
 
-// export const useLogin = () =>
-//   useMutation(({ email, password }) => {
-//     return loginUser(email, password);
-//   });
+export const useLogin = () =>
+  useMutation(({ email, password }: Login) => loginUser(email, password));
 
-// export const useCreateUser = () => useMutation((data) => userSignup(data));
+  export const useRegister = () =>
+  useMutation(({ email, password, username }: Register) =>
+    register({ username, email, password })
+  );

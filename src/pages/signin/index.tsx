@@ -6,44 +6,54 @@ import Checkbox from "../../../components/Checkbox";
 import InputField from "../../../components/InputField";
 import Image from "next/image";
 import Button from "../../../components/Button";
+import { useLogin } from "@/network-request/mutation";
+import { LoginvalidationSchema } from "../../../components/fomsValidation";
+import { useFormik } from "formik";
 
 const Login = () => {
-  // const {mutate}=useLogin();
+  const { mutate } = useLogin();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const handleLogin = (e: any) => {
-    e.preventDefault();
-    console.log("e", { e });
-    // mutate(
-    //   {email,password},
-    //    {
-    //     onSuccess: (data:any) => {
-    //        if (data.success) {
-    //         toast.success("Login Successfully");
-    //         console.log("data",{data});
-    //         setTimeout(() => {
-    //           window.location.href = "/dashboard";
-    //         }, 2000);
-    //     } else {
 
-    //       toast.error(data.message || "Login Failed");
-    //     }
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginvalidationSchema,
+    onSubmit: (values: any) => {
+      const { email, password } = values;
+      mutate(
+        { email, password },
+        {
+          onSuccess: (data: any) => {
+            if (data.success) {
+              console.log("data", { data });
+              setTimeout(() => {
+                window.location.href = "/vehicle-details";
+              }, 2000);
+            } else {
+              console.log("Login Failed");
+            }
+          },
+          onError: (data: any) => {
+            console.log("Something Went Wrong");
+          },
+        }
+      );
+    },
+  });
 
-    //     },
-    //     onError: (data:any) => {
-    //       toast.error(data?.response?.data?.message || "Something Went Wrong");
-    //     },
-    //   });
-  };
-
+  const [visibel, SetVisible] = React.useState(false);
+  const isValidVisibility =(formik.dirty && formik.isValid);
   return (
-    <>
+    <React.Fragment>
       <div>
         <div className=" pt-4 pl-6 absolute">
           <Image src="/logo.png" alt="logo" width={150} height={150} />
         </div>
         <div className="grid grid-cols-2 items-center">
-          <form onSubmit={handleLogin} method="POST">
+          <form onSubmit={isValidVisibility?formik.handleSubmit:""} method="POST">
             <div className="max-w-[440px] ml-auto mr-auto text-center pt-10">
               <h1 className="font-bold text-3xl tracking-wide">
                 New User Login
@@ -57,29 +67,64 @@ const Login = () => {
                   type="text"
                   placeholder="Email address"
                   className="bg-cool-gray"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  name={""}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  name={"email"}
+                  hasError={
+                    formik.touched.email && formik.errors.email ? true : false
+                  }
                   id={""}
                   src="/mail.svg"
                   alt="mail"
                   svgWidth={16}
                   svgHeight={16}
                 />
+                {formik.touched.email && formik.errors.email ? (
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "12px",
+                      marginTop: "-10px",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.email}
+                  </div>
+                ) : null}
 
                 <InputField
-                  type="password"
+                  type={visibel ? "text" : "password"}
                   placeholder="password"
                   className="bg-cool-gray"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  name={""}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  hasError={
+                    formik.touched.password && formik.errors.password
+                      ? true
+                      : false
+                  }
+                  name={"password"}
                   id={""}
                   src="/lock.svg"
                   alt="lock"
                   svgWidth={16}
                   svgHeight={16}
+                  onClick={() => SetVisible(!visibel)}
                 />
+                {formik.touched.password && formik.errors.password ? (
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "12px",
+                      marginTop: "-10px",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.password}
+                  </div>
+                ) : null}
                 <p className="text-right text-[#0F172A] font-semibold text-sm ">
                   <span className="cursor-pointer">Forgot Password?</span>
                 </p>
@@ -90,6 +135,7 @@ const Login = () => {
 
               <div className="mt-8 mb-4">
                 <Button
+                visible={isValidVisibility}
                   text="Proceed to Change Password"
                   className="!rounded-[30px]  justify-center"
                 />
@@ -113,7 +159,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 export default Login;

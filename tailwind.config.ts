@@ -11,6 +11,8 @@ const config: Config = {
     "./components/VehiDetails.tsx",
     "./src/pages/create-vehicle/index.tsx",
     "./src/pages/login/index.tsx",
+    "./components/InputField.tsx",
+
   ],
   theme: {
     extend: {
