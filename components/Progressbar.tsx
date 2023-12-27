@@ -19,6 +19,11 @@ const Progressbar = () => {
         <div className="border-solid border-2 rounded-xl bg-[#032272] p-[6px] w-[230px]"></div>
         <div></div>
       </div>
+      <div>
+        <progress value={80} max={100} className="w-full rounded-full">
+          80%
+        </progress>
+      </div>
     </>
   );
 };
