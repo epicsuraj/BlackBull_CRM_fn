@@ -14,6 +14,8 @@ interface imputdata {
   svgHeight: number;
   onBlur?:any;
   hasError?:any;
+  isvisibel?:boolean;
+  required?:any;
 }
 
 const InputField = ({
@@ -30,9 +32,10 @@ const InputField = ({
   alt,
   src,
   svgWidth,
+  isvisibel,
+  required,
   svgHeight,
 }: imputdata) => {
-  console.log("hasError",hasError);
   return (
     <>
       <div
@@ -49,17 +52,17 @@ const InputField = ({
             value={value}
             onBlur={onBlur}
             onChange={(e: any) => onChange(e)}
-            required
+            required={required}
           />
         </div>
         {placeholder === "password" && (
           <Image
-            src={"/eye.svg"}
+            src={!isvisibel?"/eye.svg":"unlock.svg"}
             alt={alt}
             width={svgWidth}
             height={svgHeight}
             className="cursor-pointer"
-            onClick={()=>onClick()}
+            onClick={onClick}
           />
         )}
       </div>

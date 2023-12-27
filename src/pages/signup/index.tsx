@@ -9,10 +9,10 @@ import Button from "../../../components/Button";
 import { useRegister } from "@/network-request/mutation";
 import { SignupvalidationSchema } from "../../../components/fomsValidation";
 import { useFormik } from "formik";
-
+import { useRouter } from "next/router";
 const SignUp = () => {
   const { mutate } = useRegister();
- 
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -21,9 +21,9 @@ const SignUp = () => {
     },
     validationSchema: SignupvalidationSchema,
     onSubmit: (values: any) => {
-      const {username,email,password}=values
+      const { username, email, password } = values;
       mutate(
-        {username,email,password },
+        { username, email, password },
         {
           onSuccess: (data: any) => {
             if (data.success) {
@@ -43,16 +43,23 @@ const SignUp = () => {
     },
   });
   const [visibel, SetVisible] = React.useState(false);
-  const isValidVisibility =(formik.dirty && formik.isValid)
+  const isValidVisibility = formik.dirty && formik.isValid;
 
   return (
     <React.Fragment>
       <div>
         <div className=" pt-4 pl-6 absolute">
-          <Image src="/logo.png" alt="logo" width={150} height={150} />
+          <Image src="/logo.svg" alt="logo" width={150} height={150} />
         </div>
         <div className="grid grid-cols-2 items-center">
-          <form onSubmit={isValidVisibility?formik.handleSubmit:""} method="POST">
+          <form
+            onSubmit={
+              isValidVisibility
+                ? formik.handleSubmit
+                : (e) => e.preventDefault()
+            }
+            method="POST"
+          >
             <div className="max-w-[440px] ml-auto mr-auto text-center pt-10">
               <h1 className="font-bold text-3xl tracking-wide">
                 New User Register
@@ -69,18 +76,33 @@ const SignUp = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.username}
-                  hasError={formik.touched.username && formik.errors.username ? true : false}
+                  hasError={
+                    formik.touched.username && formik.errors.username
+                      ? true
+                      : false
+                  }
                   name={"username"}
                   id={""}
+                  required={"required"}
                   src="/mail.svg"
                   alt="mail"
                   svgWidth={16}
                   svgHeight={16}
                 />
                 {formik.touched.username && formik?.errors.username ? (
-                  <div style={{textAlign:"left", fontSize:"12px", marginTop:"-10px",color:"red"}}>{formik?.errors?.username}</div>
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "12px",
+                      marginTop: "-10px",
+                      color: "red",
+                    }}
+                  >
+                    {formik?.errors?.username as React.ReactNode}
+                  </div>
                 ) : null}
                 <InputField
+                  required={"required"}
                   type="text"
                   placeholder="Email address"
                   className="bg-cool-gray"
@@ -88,7 +110,9 @@ const SignUp = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   name={"email"}
-                  hasError={formik.touched.email && formik.errors.email ? true : false}
+                  hasError={
+                    formik.touched.email && formik.errors.email ? true : false
+                  }
                   id={""}
                   src="/mail.svg"
                   alt="mail"
@@ -96,9 +120,17 @@ const SignUp = () => {
                   svgHeight={16}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div style={{textAlign:"left", fontSize:"12px", marginTop:"-10px",color:"red"}}>{formik.errors.email}</div>
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "12px",
+                      marginTop: "-10px",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.email as React.ReactNode}
+                  </div>
                 ) : null}
-
                 <InputField
                   type={visibel ? "text" : "password"}
                   placeholder="password"
@@ -106,17 +138,32 @@ const SignUp = () => {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
-                  hasError={formik.touched.password && formik.errors.password ? true : false}
+                  hasError={
+                    formik.touched.password && formik.errors.password
+                      ? true
+                      : false
+                  }
                   name={"password"}
                   id={""}
                   src="/lock.svg"
                   alt="lock"
                   svgWidth={16}
+                  required={"required"}
                   svgHeight={16}
                   onClick={() => SetVisible(!visibel)}
+                  isvisibel={visibel}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <div style={{textAlign:"left", fontSize:"12px", marginTop:"-10px",color:"red"}}>{formik.errors.password}</div>
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "12px",
+                      marginTop: "-10px",
+                      color: "red",
+                    }}
+                  >
+                    {formik.errors.password as React.ReactNode}
+                  </div>
                 ) : null}
                 <p className="text-right text-[#0F172A] font-semibold text-sm ">
                   <span className="cursor-pointer">Forgot Password?</span>
@@ -128,17 +175,17 @@ const SignUp = () => {
 
               <div className="mt-8 mb-4">
                 <Button
-                visible={isValidVisibility}
-                  text="Proceed to Change Password"
+                  visible={isValidVisibility}
+                  text="Proceed to Register"
                   className="!rounded-[30px]  justify-center"
                 />
               </div>
-              {/* <div>
-                <span className="text-[#737373] text-sm mt-10 font-medium">
+              <div>
+                <span className="text-[#737373] text-sm mt-10 font-medium cursor-pointer " onClick={()=>router.push("/signin")}>
                   Already joined?{" "}
                   <b className="text-black font-medium">Login now</b>
                 </span>
-              </div> */}
+              </div>
             </div>
           </form>
           <div className="flex justify-center">

@@ -9,12 +9,11 @@ import Button from "../../../components/Button";
 import { useLogin } from "@/network-request/mutation";
 import { LoginvalidationSchema } from "../../../components/fomsValidation";
 import { useFormik } from "formik";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const { mutate } = useLogin();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -45,18 +44,25 @@ const Login = () => {
   });
 
   const [visibel, SetVisible] = React.useState(false);
-  const isValidVisibility =(formik.dirty && formik.isValid);
+  const isValidVisibility = formik.dirty && formik.isValid;
   return (
     <React.Fragment>
       <div>
         <div className=" pt-4 pl-6 absolute">
-          <Image src="/logo.png" alt="logo" width={150} height={150} />
+          <Image src="/logo.svg" alt="logo" width={150} height={150} />
         </div>
         <div className="grid grid-cols-2 items-center">
-          <form onSubmit={isValidVisibility?formik.handleSubmit:""} method="POST">
+          <form
+            onSubmit={
+              isValidVisibility
+                ? formik.handleSubmit
+                : (e) => e.preventDefault()
+            }
+            method="POST"
+          >
             <div className="max-w-[440px] ml-auto mr-auto text-center pt-10">
               <h1 className="font-bold text-3xl tracking-wide">
-                New User Login
+                 User Login
               </h1>
               <p className="mt-2">
                 Sign in using your email and temporary password to set up your
@@ -68,6 +74,7 @@ const Login = () => {
                   placeholder="Email address"
                   className="bg-cool-gray"
                   onChange={formik.handleChange}
+                  required={"required"}
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   name={"email"}
@@ -89,7 +96,7 @@ const Login = () => {
                       color: "red",
                     }}
                   >
-                    {formik.errors.email}
+                    {formik.errors.email as React.ReactNode}
                   </div>
                 ) : null}
 
@@ -98,6 +105,7 @@ const Login = () => {
                   placeholder="password"
                   className="bg-cool-gray"
                   onChange={formik.handleChange}
+                  required={"required"}
                   onBlur={formik.handleBlur}
                   value={formik.values.password}
                   hasError={
@@ -112,6 +120,7 @@ const Login = () => {
                   svgWidth={16}
                   svgHeight={16}
                   onClick={() => SetVisible(!visibel)}
+                  isvisibel={visibel}
                 />
                 {formik.touched.password && formik.errors.password ? (
                   <div
@@ -122,7 +131,7 @@ const Login = () => {
                       color: "red",
                     }}
                   >
-                    {formik.errors.password}
+                    {formik.errors.password as React.ReactNode}
                   </div>
                 ) : null}
                 <p className="text-right text-[#0F172A] font-semibold text-sm ">
@@ -135,17 +144,20 @@ const Login = () => {
 
               <div className="mt-8 mb-4">
                 <Button
-                visible={isValidVisibility}
-                  text="Proceed to Change Password"
+                  visible={isValidVisibility}
+                  text="Proceed to Login"
                   className="!rounded-[30px]  justify-center"
                 />
               </div>
-              {/* <div>
-                <span className="text-[#737373] text-sm mt-10 font-medium">
-                  Already joined?{" "}
-                  <b className="text-black font-medium">Login now</b>
+              <div>
+                <span
+                  className="text-[#737373] text-sm mt-10 font-medium cursor-pointer"
+                  onClick={() => router.push("/signup")}
+                >
+                  Haven not joined yet? 
+                  <b className="text-black font-medium"> Register now</b>
                 </span>
-              </div> */}
+              </div>
             </div>
           </form>
           <div className="flex justify-center">
