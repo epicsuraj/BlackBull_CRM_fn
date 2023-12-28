@@ -18,6 +18,8 @@ const config: Config = {
     "./components/FileUpload.tsx",
     "./components/Footer.tsx",
     "./src/pages/dashboard/index.tsx",
+    "./components/InputField.tsx",
+
   ],
   theme: {
     extend: {

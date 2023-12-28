@@ -1,14 +1,20 @@
-// import httpProxy from "http-proxy";
+import httpProxy from "http-proxy";
+import { IncomingMessage, ServerResponse } from "http";
 
-// const API_URL = process.env.REACT_APP_API_URL;
 
-// console.log({ API_URL });
+const API_URL = process.env.NEXT_APP_API_URL;
 
-// const proxy = httpProxy.createProxyServer();
+console.log({ API_URL });
 
-// // Define your proxy route
-// const Proxy = (req, res) => {
-//   proxy.web(req, res, { target: API_URL, changeOrigin: true });
-// };
+const proxy = httpProxy.createProxyServer();
+export const config = {
+  api: {
+      bodyParser: false,
+      externalResolver: true,
+  },
+};
+const Proxy = (req: any, res: any) => {
+  proxy.web(req, res, { target: API_URL, changeOrigin: true });
+};
 
-// module.exports = Proxy;
+export default Proxy;
