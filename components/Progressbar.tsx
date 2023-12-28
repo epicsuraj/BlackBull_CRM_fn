@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 const Progressbar = () => {
   return (
@@ -11,16 +12,13 @@ const Progressbar = () => {
           80% to complete
         </h5>
         <p className="text-[#8097A2] text-[15px] flex gap-1 items-center">
-          {/* <span><img src="/clock.png" alt="" /></span> */}
+          <Image src="/clock.svg" alt="clock" width={20} height={20} />
           20min
         </p>
       </div>
-      <div className="border-solid border-2 rounded-xl bg-[#EFF2F3] mt-2">
-        <div className="border-solid border-2 rounded-xl bg-[#032272] p-[6px] w-[230px]"></div>
-        <div></div>
-      </div>
+
       <div>
-        <progress value={80} max={100} className="w-full rounded-full">
+        <progress value={80} max={100} className="w-full h-2 rounded-full">
           80%
         </progress>
       </div>

@@ -53,7 +53,21 @@ input:focus-visible {
 }
 progress::-webkit-progress-bar {
   background-color: #eff2f3;
+  border-radius: 10px;
 }
 progress::-webkit-progress-value {
   background-color: #032272;
+  border-radius: 10px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
 }

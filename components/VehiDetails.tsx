@@ -106,7 +106,7 @@ const VehiDetails = () => {
         {addPopUp === true ? (
           <>
             <div className="w-screen h-screen  fixed top-0 left-0 backdrop-blur-md flex">
-              <div className="w-[440px] h-[176px] bg-white m-auto rounded-xl relative">
+              <div className="w-[440px] h-[176px] bg-white m-auto rounded-xl relative border">
                 <h4 className="text-center font-semibold p-4">
                   Add a New Vehicle
                 </h4>

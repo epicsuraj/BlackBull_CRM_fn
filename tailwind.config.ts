@@ -11,6 +11,13 @@ const config: Config = {
     "./components/VehiDetails.tsx",
     "./src/pages/create-vehicle/index.tsx",
     "./src/pages/login/index.tsx",
+    "./components/Progressbar.tsx",
+    "./components/Maininputfield.tsx",
+    "./components/Maindatefield.tsx",
+    "./components/Mainselectfield.tsx",
+    "./components/FileUpload.tsx",
+    "./components/Footer.tsx",
+    "./src/pages/dashboard/index.tsx",
   ],
   theme: {
     extend: {
