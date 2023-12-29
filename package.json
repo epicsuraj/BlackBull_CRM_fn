@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/pm": "^2.1.13",
+    "@tiptap/starter-kit": "^2.1.13",
+    "@tiptap/vue-3": "^2.1.13",
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
     "@types/http-proxy": "^1.17.14",
