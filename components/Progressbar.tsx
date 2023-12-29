@@ -8,7 +8,7 @@ const Progressbar = () => {
         Your progress
       </h4>
       <div className="flex justify-between items-center">
-        <h5 className="text-[#032272] text-[16px] font-bold">
+        <h5 className="text-primary text-[16px] font-bold">
           80% to complete
         </h5>
         <p className="text-[#8097A2] text-[15px] flex gap-1 items-center">

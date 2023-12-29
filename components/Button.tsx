@@ -6,7 +6,7 @@ const Button = (props: any) => {
     <div>
       <button
         type="submit"
-        className={`flex items-center gap-2 text-white rounded-md p-2 w-full ${props.visible? "bg-[#032272]": "bg-[#818692]"} bg-[#032272] ${props.className}`}
+        className={`flex items-center gap-2 text-white rounded-md p-2 w-full bg-primary-color ${props.className}`}
         onClick={props.onClick}
         disabled={props.disabled}
       >

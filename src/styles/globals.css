@@ -56,7 +56,7 @@ progress::-webkit-progress-bar {
   border-radius: 10px;
 }
 progress::-webkit-progress-value {
-  background-color: #032272;
+  background-color: #8d3194;
   border-radius: 10px;
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -70,4 +70,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   right: 0;
   top: 0;
   width: auto;
+}
+select option {
+  background-color: white;
+  color: black;
+  text-align: left;
 }

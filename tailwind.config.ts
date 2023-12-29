@@ -19,7 +19,8 @@ const config: Config = {
     "./components/Footer.tsx",
     "./src/pages/dashboard/index.tsx",
     "./components/InputField.tsx",
-
+    "./src/pages/create-vehicle/index.tsx",
+    "./components/StatusChip.tsx"
   ],
   theme: {
     extend: {

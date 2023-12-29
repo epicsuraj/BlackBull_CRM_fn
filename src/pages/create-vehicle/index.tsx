@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Button from "../../../components/Button";
 import DateWithoutDropdown from "../../../components/DateWithoutDropdown";
+import DropDownMap from "../../../components/DropDownMap";
 import FileUpload from "../../../components/FileUpload";
 import Footer from "../../../components/Footer";
 import Header from "../../../components/Header";
@@ -8,8 +10,20 @@ import Maininputfield from "../../../components/Maininputfield";
 import Mainselectfield from "../../../components/Mainselectfield";
 import Progressbar from "../../../components/Progressbar";
 import Sidebar from "../../../components/Sidebar";
+import StatusChip from "../../../components/StatusChip";
 
 const CreateVehicle = () => {
+  const xyz = ownershipStatus?.map((item) => {
+    console.log("ch", { item });
+    return item;
+  });
+
+  console.log("cho", { xyz });
+
+  const [ownerStatus, setOwnerStatus] = useState("");
+  console.log("owner status on select", ownerStatus);
+  const [selectedData, setSelectedData] = useState("");
+
   return (
     <>
       <Header />
@@ -52,12 +66,40 @@ const CreateVehicle = () => {
                 />
                 <Maininputfield label="Engine Number" className="w-full" />
                 <Maininputfield label="Compliance Plate" className="w-full" />
-                <Mainselectfield label="Ownership Status" option="Owned" />
+                <DropDownMap
+                  label={"Ownership Status"}
+                  mapOption={ownershipStatus}
+                  selectedData={selectedData}
+                  setSelectedData={setSelectedData}
+                />
+
                 <Mainselectfield label="Registration Status" option="Active" />
               </div>
               <div className="mt-4 grid grid-cols-3">
                 <FileUpload />
               </div>
+              {selectedData === "Hired" && (
+                <div className="mt-8">
+                  <h3 className="w-full mb-4 font-semibold">Bank Details</h3>
+                  <div className="grid grid-cols-3 gap-4">
+                    <Maininputfield
+                      label="BSB"
+                      value="Allianz"
+                      className="w-full"
+                    />
+                    <Maininputfield
+                      label="Account Number"
+                      value="1234-5678-9012"
+                      className="w-full"
+                    />
+                    <Maininputfield
+                      label="Account Name"
+                      value="Rentals Pty Ltd"
+                      className="w-full"
+                    />
+                  </div>
+                </div>
+              )}
               <div className="mt-8">
                 <h3 className="w-full mb-4 font-semibold">Vehicle Insurance</h3>
                 <div className="grid grid-cols-3 gap-4">
@@ -134,7 +176,22 @@ const CreateVehicle = () => {
                         <div>{data.rego}</div>
                         <div>{data.uploadDate}</div>
                         <div>{data.UploadedDoc}</div>
-                        <div>{data.status}</div>
+                        <div className="text-center items-center justify-center m-auto">
+                          {/* <span
+                            className={` ${
+                              data.status === "Approved"
+                                ? "bg-[#2DD36F]"
+                                : data.status === "Under Review"
+                                ? "bg-[#3DC2FF]"
+                                : data.status === "Rejected"
+                                ? "bg-[#EB445A]"
+                                : ""
+                            } px-4 pt-[3px] pb-[7px] text-white rounded-full`}
+                          >
+                            {data.status}
+                          </span> */}
+                          <StatusChip className="w-fit" />
+                        </div>
                         <div className="underline text-center">
                           <span className="cursor-pointer">
                             {" "}
@@ -151,7 +208,7 @@ const CreateVehicle = () => {
           <div className="mr-4 px-4 rounded-md mt-4 p-4 flex justify-end gap-2">
             <Button
               text="Save"
-              className="bg-transparent !text-[#000] border px-8 !rounded-xl text-sm border-[#032272]"
+              className="!bg-transparent !text-[#000] border px-8 !rounded-xl text-sm border-[#032272]"
             />
             <Button text="Create" className="px-8 !rounded-xl text-sm" />
           </div>
@@ -206,5 +263,16 @@ const documentDataCollection = [
     UploadedDoc: "doc.pdf",
     status: "Rejected",
     viewDoc: "view",
+  },
+];
+const ownershipStatus = [
+  {
+    value: "Owned",
+  },
+  {
+    value: "Hired",
+  },
+  {
+    value: "Sub-Contractor",
   },
 ];
